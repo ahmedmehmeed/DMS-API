@@ -25,6 +25,15 @@ namespace Demo.Application.ApplicationInstaller
                 options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("DMSTask", builder =>
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                );
+            });
 
             services.AddAuthentication(options =>
             {

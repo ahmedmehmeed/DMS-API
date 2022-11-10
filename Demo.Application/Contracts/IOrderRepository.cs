@@ -1,4 +1,5 @@
 ﻿using Demo.Application.Features.Orders.Queries.GetOrdersList;
+using Demo.Application.Pagination;
 using Demo.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,6 @@ namespace Demo.Application.Contracts
         /// <summary>
         /// Include all relation tables
         /// </summary>
-        Task<IReadOnlyList<Order>> GetAllOrdersLists();
+        Task<PagedList<Order>> GetAllOrdersLists(OrderFilterDto orderFilterDto);
     }
 }

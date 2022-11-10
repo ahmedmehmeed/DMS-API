@@ -17,16 +17,17 @@ namespace Demo.Api.Controllers
         }
 
 
-        [HttpGet("GetAllOrders")]
+        [HttpPost("GetAllOrders")]
 
-        public async Task<ActionResult<List<GetOrdersListDto>>> Get()
+        public async Task<ActionResult<List<GetOrdersListDto>>> Get(OrderFilterDto orderFilterDto )
         {
-            var orders = await mediator.Send(new GetOrdersListQuery());
+
+            var orders = await mediator.Send(new GetOrdersListQuery() { OrderFilter= orderFilterDto });
             return Ok(orders);
         }
 
-        [HttpPost("AddOrder")]
 
+        [HttpPost("AddOrder")]
         public async Task<ActionResult> post(Guid itemId)
         {
             await mediator.Send(new CreateOrderCommand() {ItemId=itemId});

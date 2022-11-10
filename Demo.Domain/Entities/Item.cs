@@ -8,8 +8,12 @@ namespace Demo.Domain.Entities
 {
     public class Item
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public Item()
+        {
+            Orders = new HashSet<Order>();
+        }
 
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string? Atr1 { get; set; }
         public string? Atr2 { get; set; }
         public string? Atr3 { get; set; }
@@ -26,5 +30,7 @@ namespace Demo.Domain.Entities
         public int UOMId { get; set; }
 
         public UnitOfMeasurement UOM { get; set; }
+
+        public ICollection<Order>? Orders { get; private set; }
     }
 }

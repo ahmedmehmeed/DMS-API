@@ -18,6 +18,7 @@ namespace Demo.Persistence
         }
 
         public DbSet<Item> Items { get; set; }
+        public DbSet<Order> Orders { get; set; }
         public DbSet<UnitOfMeasurement>  UnitOfMeasurements { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

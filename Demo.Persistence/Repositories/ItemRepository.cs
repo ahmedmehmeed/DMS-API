@@ -12,6 +12,7 @@ namespace Demo.Persistence.Repositories
     {
         public ItemRepository(DemoContext demoContext) : base(demoContext)
         {
+
         }
     }
 }

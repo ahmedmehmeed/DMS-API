@@ -22,6 +22,7 @@ namespace Demo.Persistence.Installer
             services.AddScoped(typeof(IItemRepository), typeof(ItemRepository));
             services.AddScoped(typeof(ITokenRepository), typeof(TokenRepository));
             services.AddScoped(typeof(IIdentityRepository), typeof(IdentityRepository));
+            services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
             
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {

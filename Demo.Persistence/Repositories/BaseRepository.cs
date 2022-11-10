@@ -10,7 +10,7 @@ namespace Demo.Persistence.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        private readonly DemoContext demoContext;
+        public readonly DemoContext demoContext;
 
         public BaseRepository(DemoContext demoContext)
         {
@@ -23,17 +23,23 @@ namespace Demo.Persistence.Repositories
             return entity;
         }
 
+        public async Task<bool> Commit()
+        {
+           return await demoContext.SaveChangesAsync() > 0;
+        }
+
         public async Task DeleteAsync(T entity)
         {
             demoContext.Set<T>().Remove(entity);
             await demoContext.SaveChangesAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(Guid id)
         {
             return await demoContext.Set<T>().FindAsync(id);
         }
 
+        public  async Task<T> GetByNameAsync(string Name) => await demoContext.Set<T>().FindAsync(Name);
 
 
         public async Task<IReadOnlyList<T>> ListAllAsync()

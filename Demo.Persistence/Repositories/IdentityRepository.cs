@@ -5,23 +5,25 @@ using Demo.Application.Features.Account.Commands.CreatAccount;
 using Demo.Domain.Entities;
 using Demo.Domain.Security;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
 
 
 namespace Demo.Persistence.Repositories
 {
-    public class IdentityRepository : IIdentityRepository
+    public class IdentityRepository : BaseRepository<AppUser>, IIdentityRepository
     {
         private readonly UserManager<AppUser> userManager;
         private readonly IMapper mapper;
         private readonly ITokenRepository tokenRepository;
 
-        public IdentityRepository(UserManager<AppUser> userManager, IMapper mapper, ITokenRepository tokenRepository)
+        public IdentityRepository(UserManager<AppUser> userManager, IMapper mapper, ITokenRepository tokenRepository, DemoContext demoContext) : base(demoContext)
         {
             this.userManager = userManager;
             this.mapper = mapper;
             this.tokenRepository = tokenRepository;
         }
+
 
         public async Task<AuthModel> LoginAsync(LoginDto loginDto)
         {
@@ -107,5 +109,11 @@ namespace Demo.Persistence.Repositories
             };
 
         }
+
+        public async Task<AppUser> GetByUserNameAsync(string Username)
+        {
+            return await demoContext.Users.FirstOrDefaultAsync(u => u.UserName==Username);
+        }
+
     }
 }

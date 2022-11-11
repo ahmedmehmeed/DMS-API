@@ -94,7 +94,7 @@ namespace Demo.Persistence.Repositories
                 return new AuthModel { Message = errors, IsSuccess = false };
             }
 
-            await userManager.AddToRoleAsync(user, "Admin");
+            await userManager.AddToRoleAsync(user, "Customer");
 
             var JwtSecurityToken = await tokenRepository.CreateJwtToken(user);
 

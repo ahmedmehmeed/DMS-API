@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Demo.Application.Contracts;
-using Demo.Domain.Security;
+﻿using Demo.Domain.Security;
 using MediatR;
 
 

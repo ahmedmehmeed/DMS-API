@@ -15,7 +15,6 @@ namespace Demo.Api.Controllers
         }
 
         [HttpGet("GetAllItems")]
-
         public async Task<ActionResult<List<GetItemsListDto>>> Get()
         {
             var items = await mediator.Send(new GetItemsListQuery());

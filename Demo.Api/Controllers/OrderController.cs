@@ -1,12 +1,13 @@
 ﻿using Demo.Application.Features.Orders.Commands.CreateOrder;
 using Demo.Application.Features.Orders.Queries.GetOrdersList;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Demo.Api.Controllers
 {
-
+    [Authorize]
     public class OrderController : BaseApiController
     {
         private readonly IMediator mediator;
@@ -16,9 +17,8 @@ namespace Demo.Api.Controllers
             this.mediator = mediator;
         }
 
-
+        
         [HttpPost("GetAllOrders")]
-
         public async Task<ActionResult<List<GetOrdersListDto>>> Get(OrderFilterDto orderFilterDto )
         {
 
@@ -33,5 +33,6 @@ namespace Demo.Api.Controllers
             await mediator.Send(new CreateOrderCommand() {ItemId=itemId});
             return Ok();
         }
+
     }
 }

@@ -2,7 +2,6 @@
 using Demo.Application.Features.Account.Commands.CreatAccount;
 using Demo.Domain.Security;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Demo.Api.Controllers
@@ -27,6 +26,7 @@ namespace Demo.Api.Controllers
             return Ok(new { token = result.Token });
 
         }
+
 
         [HttpPost("Login")]
         public async Task<ActionResult<AuthModel>> Login([FromBody] LoginDto loginDto)

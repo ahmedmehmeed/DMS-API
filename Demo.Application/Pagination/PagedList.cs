@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Demo.Application.Pagination
 {
     public class PagedList<T> : List<T>
@@ -28,7 +23,6 @@ namespace Demo.Application.Pagination
         public static PagedList<T> ToPagedList(IQueryable<T> source, int pageSize, int pageNumber)
         {
             var count = source.Count();
-            //var items =  source.Take(((pageNumber - 1) * pageSize)..(pageNumber * pageSize)).ToList();
             var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
             return new PagedList<T>(items, pageSize, pageNumber, count);
         }

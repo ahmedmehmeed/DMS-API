@@ -23,13 +23,15 @@ namespace Demo.Persistence.Installer
             services.AddScoped(typeof(ITokenRepository), typeof(TokenRepository));
             services.AddScoped(typeof(IIdentityRepository), typeof(IdentityRepository));
             services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
-            
+
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = false;
 
             }).AddEntityFrameworkStores<DemoContext>()
-               .AddDefaultTokenProviders();
+               .AddDefaultTokenProviders()
+               .AddRoles<IdentityRole>();
+
 
             services.Configure<JWT>(configuration.GetSection("JWT"));
 

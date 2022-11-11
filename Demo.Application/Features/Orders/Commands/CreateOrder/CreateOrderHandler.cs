@@ -28,7 +28,8 @@ namespace Demo.Application.Features.Orders.Commands.CreateOrder
             var userName = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var user = await identityRepository.GetByUserNameAsync(userName);
             var order = new Order { ItemId=request.ItemId,UserId=user.Id};
-            await orderRepository.AddAsync(order);
+            //await orderRepository.AddAsync(order);
+            await orderRepository.AddOrderAsync(order);
             return Unit.Value;
         }
     }

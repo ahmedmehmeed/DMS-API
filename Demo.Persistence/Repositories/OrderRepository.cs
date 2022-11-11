@@ -49,5 +49,30 @@ namespace Demo.Persistence.Repositories
 
             return predicate;
         }
+
+        public async Task AddOrderAsync(Order order)
+        {
+            using var transaction = demoContext.Database.BeginTransaction();
+            try
+            {
+                await  demoContext.AddAsync(order);
+                await  demoContext.SaveChangesAsync();
+                var item= await demoContext.Items.FirstOrDefaultAsync(p=>p.Id==order.ItemId);
+                if(item.QTY <= order.Quantity)
+                    transaction.Rollback();
+                item.QTY -= order.Quantity;
+                demoContext.Entry(item).State = EntityState.Modified;
+                await demoContext.SaveChangesAsync();
+                transaction.Commit();
+
+            }
+            catch (Exception)
+            {
+
+                transaction.Rollback();
+            }
+
+           await demoContext.SaveChangesAsync();
+        }
     }
 } 

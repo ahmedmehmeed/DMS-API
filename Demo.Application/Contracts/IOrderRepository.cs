@@ -15,5 +15,7 @@ namespace Demo.Application.Contracts
         /// Include all relation tables
         /// </summary>
         Task<PagedList<Order>> GetAllOrdersLists(OrderFilterDto orderFilterDto);
+
+        Task AddOrderAsync(Order order);
     }
 }

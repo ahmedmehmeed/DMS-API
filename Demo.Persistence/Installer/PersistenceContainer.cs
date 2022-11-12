@@ -29,9 +29,7 @@ namespace Demo.Persistence.Installer
                 options.User.RequireUniqueEmail = false;
 
             }).AddEntityFrameworkStores<DemoContext>()
-               .AddDefaultTokenProviders()
-               .AddRoles<IdentityRole>();
-
+               .AddDefaultTokenProviders();
 
             services.Configure<JWT>(configuration.GetSection("JWT"));
 

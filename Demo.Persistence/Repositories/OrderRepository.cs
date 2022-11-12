@@ -23,8 +23,6 @@ namespace Demo.Persistence.Repositories
                 var orders = demoContext.Orders.Where(predicate).Include(p => p.User).Include(p => p.Item).ThenInclude(p => p.UOM).AsQueryable();
                 return PagedList<Order>.ToPagedList(orders, orderFilterDto.PageSize, orderFilterDto.PageNumber);
             });
-
-
         }
 
 

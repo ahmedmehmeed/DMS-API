@@ -15,8 +15,6 @@ namespace Demo.Application.Features.Account.Commands.AccountLogin
             RuleFor(p => p.LoginDto.Password)
                 .NotEmpty().WithMessage("Password is required")
                 .NotNull().WithMessage("Password is required");
-
-
         }
     }
 }
